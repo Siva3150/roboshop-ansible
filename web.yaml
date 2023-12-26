@@ -33,7 +33,7 @@
       src: roboshop.conf
       dest: /etc/nginx/default.d/roboshop.conf
 
-   - name: start and enable web
+  - name: start and enable web
     ansible.builtin.service:
       name: web
       state: started
