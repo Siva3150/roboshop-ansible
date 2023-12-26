@@ -6,17 +6,17 @@
   ansible.builtin.command: dnf module disable nodejs -y ; dnf module enable nodejs:18 -y
   
   - name: Install nodejs
-  ansible.builtin.dnf:
-    name: nodejs
-    state: present
+    ansible.builtin.dnf:
+      name: nodejs
+      state: present
 
   - name: add user roboshop
-  ansible.builtin.user:
-    name: roboshop
+    ansible.builtin.user:
+      name: roboshop
 
   - name: create app directory
-  ansible.builtin.file:
-    path: /app
-    state: directory
+    ansible.builtin.file:
+      path: /app
+      state: directory
 
       
