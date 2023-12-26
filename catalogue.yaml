@@ -35,36 +35,37 @@
       dest: /app
       remote_src: yes
 
-  - name: install dependencies
+  - name: Install dependencies
     ansible.builtin.command: npm install
-      args:
-        chdir: /app
-  
-  - name: copy catalogue service 
-    ansible.builtin.copy:
-      src: mongodb.repo
-      dest: /etc/yum.repos.d/mongodb.repo
-    
+    args:
+      chdir: /app
 
-  - name: daemon reload and start
+  - name: Copy catalogue service
+    ansible.builtin.copy:
+      src: catalogue.service
+      dest: /etc/systemd/system/catalogue.service
+
+  - name: deamon realod and start
     ansible.builtin.systemd_service:
       daemon_reload: true
 
-   # let's start after the data is loaded
+  # let's start after the data is loaded
 
-  - name: copy mongodb repo
+  - name: Copy mongodb repo
     ansible.builtin.copy:
       src: mongodb.repo
       dest: /etc/yum.repos.d/mongodb.repo
 
-  - name: install mongodb client
+  - name: Install mongodb client
     ansible.builtin.package:
-      name: mongodb-org-shell 
+      name: mongodb-org-shell
       state: present
 
   - name: get the categories count
-    ansible.builtin.command:  mongo --host mongodb.sivadevops.online --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
+    ansible.builtin.command:  mongo --host mongodb.daws76s.online --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
     register: product_count
+
+  
 
   
 
